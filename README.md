@@ -1,6 +1,7 @@
 Node-Recurly
 ===============
 [![Build Status](https://travis-ci.org/geoffdutton/recurly-js.svg?branch=master)](https://travis-ci.org/geoffdutton/recurly-js)
+[![npm](https://img.shields.io/npm/dm/recurly-js.svg)](https://www.npmjs.com/package/recurly-js) [![Known Vulnerabilities](https://snyk.io/test/github/geoffdutton/recurly-js/badge.svg)](https://snyk.io/test/github/geoffdutton/recurly-js)
 
 This is a fork of original `node-recurly` library by [Rob Righter](https://github.com/robrighter) for the recurly recurring billing service. 
 
@@ -18,7 +19,8 @@ Add a config file to your project that has contents similar to:
 			API_KEY: 'secret',
 			SUBDOMAIN:    '[your_account]',
 			ENVIRONMENT:  'sandbox',
-			DEBUG: false
+			DEBUG: false,
+			API_VERSION: 2.7 // optional
 		};
 
 
@@ -107,7 +109,8 @@ http://docs.recurly.com/api/coupons/coupon-redemption
     recurly.couponRedemption.redeem(couponcode, details, callback)
     recurly.couponRedemption.get(accountcode, callback)
     recurly.couponRedemption.remove(accountcode, callback)
-    recurly.couponRedemption.getByInvoice(invoicenumber, callback)
+    recurly.couponRedemption.getByInvoice(invoicenumber, callback) // Deprecated
+    recurly.couponRedemption.getAllByInvoice(invoicenumber, callback)
 
 Invoices
 ===============
@@ -167,6 +170,14 @@ http://docs.recurly.com/api/plans/add-ons
     recurly.planAddons.update(plancode, addoncode, details, callback)
     recurly.planAddons.remove(plancode, addoncode, callback)
 
+Purchases
+=========
+https://dev.recurly.com/docs/create-purchase
+
+    recurly.purchases.create(details, callback)
+
+  The purchase endpoint requires API version v2.6. Creating multiple subscriptions requires
+  API v2.8, and some extra feature flags enabled. Contact Recurly support for more details.
 
 Transactions
 ===============
